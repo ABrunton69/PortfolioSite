@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aram Brunton - Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Light Theme Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1F2937;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .header-light {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .card-light {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .project-card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+        }
+        .btn-primary {
+            background-color: #2563EB;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1D4ED8;
+        }
+        .section-title {
+            border-bottom-color: #2563EB;
+        }
+        .section-bg {
+             background-color: #F9FAFB;
+        }
+        .nav-link {
+            color: #4B5563;
+        }
+        .nav-link:hover {
+            color: #2563EB;
+        }
+        .icon-skill {
+            transition: transform 0.3s ease;
+        }
+        .footer-bg {
+            background-color: #F3F4F6;
+        }
+
+        /* Dark Theme Overrides */
+        .dark body {
+            background-color: #111827;
+            color: #E5E7EB;
+        }
+        .dark .header-light {
+            background-color: rgba(17, 24, 39, 0.8);
+            border-bottom: 1px solid #374151;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .dark .card-light {
+            background-color: #1F2937;
+            border-color: #374151;
+        }
+        .dark .project-card-item:hover {
+             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .dark .btn-primary {
+            background-color: #4F46E5;
+        }
+        .dark .btn-primary:hover {
+            background-color: #6366F1;
+        }
+        .dark .section-title {
+            border-bottom-color: #4F46E5;
+        }
+        .dark .section-bg {
+             background-color: #1F2937;
+        }
+        .dark .nav-link {
+            color: #D1D5DB;
+        }
+        .dark .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .dark .footer-bg {
+            background-color: #1F2937;
+        }
+        .dark .text-gray-800, .dark .text-gray-900 { color: #E5E7EB; }
+        .dark .text-gray-600, .dark .text-gray-700 { color: #9CA3AF; }
+        .dark .project-link { color: #818CF8; }
+        .dark .project-link:hover { color: #A78BFA; }
+        .dark .social-link:hover { color: #818CF8; }
+        .dark .mobile-menu-bg { background-color: #1F2937; }
+        
+        /* Contact Bubble Styles */
+        .contact-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+        .contact-main-button {
+            z-index: 10;
+        }
+        .main-icon {
+            transition: transform 0.3s ease;
+        }
+        .contact-container:hover .main-icon,
+        .contact-container.active .main-icon {
+            transform: rotate(45deg);
+        }
+        .contact-bubble {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+            transform: scale(0);
+            opacity: 0;
+        }
+        
+        .contact-container:hover .contact-bubble,
+        .contact-container.active .contact-bubble {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .contact-container:hover .bubble-1,
+        .contact-container.active .bubble-1 {
+            transform: translate(-95px, 0) scale(1); /* GitHub */
+        }
+        .contact-container:hover .bubble-2,
+        .contact-container.active .bubble-2 {
+            transform: translate(0, -85px) scale(1); /* Email */
+        }
+        .contact-container:hover .bubble-3,
+        .contact-container.active .bubble-3 {
+            transform: translate(95px, 0) scale(1); /* LinkedIn */
+        }
+
+        .bubble-light { background-color: #2563EB; color: white; }
+        .bubble-light:hover { background-color: #1D4ED8; }
+        .dark .bubble-dark { background-color: #4F46E5; color: white; }
+        .dark .bubble-dark:hover { background-color: #6366F1; }
+
+        /* Scroller Animation */
+        @keyframes scroll-left {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .animate-scroll-skills {
+            animation: scroll-left 40s linear infinite;
+        }
+        
+        /* Project Grid Expansion Styles */
+        #projects-wrapper {
+            transition: max-height 0.7s ease-in-out;
+            overflow: hidden;
+        }
+
+        .projects-collapsed {
+            max-height: 450px; /* Height for one row on large screens */
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+        }
+
+        @media (max-width: 1024px) { /* For 2-column layout */
+            .projects-collapsed {
+                max-height: 480px;
+            }
+        }
+        @media (max-width: 768px) { /* For 1-column layout */
+            .projects-collapsed {
+                 max-height: 460px;
+            }
+        }
+
+        .projects-expanded {
+            max-height: 1500px; /* Large enough for all projects */
+            -webkit-mask-image: none;
+            mask-image: none;
+        }
+        
+        /* Initial Load Animation */
+        #main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        #main-content.loaded {
+            opacity: 1;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+        
+        /* Cursor Glow Effect */
+        #cursor-glow {
+            position: fixed;
+            width: 180px; /* 30% of original 600px */
+            height: 180px; /* 30% of original 600px */
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 60%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease-out;
+            opacity: 0;
+            z-index: 0; /* Behind other content */
+        }
+        .dark #cursor-glow {
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+        }
+        
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* Hide effects on mobile */
+        @media (hover: none) or (pointer: coarse) {
+            #cursor-glow, #particle-canvas {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Background Effects -->
+    <canvas id="particle-canvas"></canvas>
+    <div id="cursor-glow"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 header-light">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800">AB</a>
+            <div class="flex items-center">
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="nav-link transition-colors">About</a>
+                    <a href="#projects" class="nav-link transition-colors">Projects</a>
+                    <a href="#skills" class="nav-link transition-colors">Skills</a>
+                    <a href="#contact" class="nav-link transition-colors">Contact</a>
+                </nav>
+                <!-- Dark Mode Toggle -->
+                <div class="hidden md:flex items-center ml-6">
+                    <i class="fas fa-sun text-yellow-500"></i>
+                    <label for="dark-mode-toggle-desktop" class="relative inline-flex items-center cursor-pointer mx-2">
+                      <input type="checkbox" id="dark-mode-toggle-desktop" class="sr-only peer dark-mode-toggle">
+                      <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:bg-blue-600 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                    <i class="fas fa-moon text-gray-400"></i>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none ml-4">
+                    <i class="fas fa-bars text-2xl text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mobile-menu-bg border-t border-gray-200 dark:border-gray-700">
+            <nav class="px-6 pt-2 pb-4 flex flex-col space-y-2">
+                <a href="#about" class="nav-link block py-2">About</a>
+                <a href="#projects" class="nav-link block py-2">Projects</a>
+                <a href="#skills" class="nav-link block py-2">Skills</a>
+                <a href="#contact" class="nav-link block py-2">Contact</a>
+                 <!-- Dark Mode Toggle for Mobile -->
+                <div class="flex items-center justify-center pt-4">
+                    <i class="fas fa-sun text-yellow-500"></i>
+                    <label for="dark-mode-toggle-mobile" class="relative inline-flex items-center cursor-pointer mx-2">
+                      <input type="checkbox" id="dark-mode-toggle-mobile" class="sr-only peer dark-mode-toggle">
+                      <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:bg-blue-600 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                    <i class="fas fa-moon text-gray-400"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen flex flex-col justify-center items-center text-center relative">
+            <div>
+                <img src="https://placehold.co/150x150/2563EB/FFFFFF?text=AB" alt="Aram Brunton" class="w-40 h-40 mx-auto rounded-full mb-6 border-4 border-gray-200 dark:border-gray-700 shadow-lg">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">Hi, I'm Aram Brunton</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">A second-year Software Engineering student at Teesside University with a passion for back-end development.</p>
+                <a href="#projects" class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg inline-block">View My Work</a>
+            </div>
+            <div id="scroll-indicator" class="absolute bottom-10">
+                <a href="#about">
+                    <i class="fas fa-chevron-down text-4xl text-gray-400 dark:text-gray-500 animate-bounce-slow"></i>
+                </a>
+            </div>
+        </section>
+
+        <div id="main-content">
+            <!-- About Me Section -->
+            <section id="about" class="py-20">
+                 <div class="text-center mb-12">
+                    <h2 class="section-title text-3xl font-bold pb-2 inline-block">About Me</h2>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-2/3">
+                        <div id="bio-text">
+                            <p class="text-lg text-gray-600 mb-4 leading-relaxed">
+                                Hello! I'm a second-year Software Engineering student at Teesside University, passionate about building robust and scalable applications. My focus is on back-end development, and I enjoy tackling the logic and infrastructure that power modern software.
+                            </p>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                I'm currently expanding my skillset by exploring dynamic web application frameworks like React and Blazor. When I'm not coding, I'm diving into new technologies and working on personal projects to further my journey toward becoming a back-end software engineer.
+                            </p>
+                        </div>
+                    </div>
+                     <div class="md:w-1/3 flex justify-center">
+                        <img src="https://placehold.co/300x300/F3F4F6/1F2937?text=Code" alt="Coding illustration" class="rounded-lg shadow-xl">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="py-20 section-bg">
+                <div class="text-center mb-12">
+                    <h2 class="section-title text-3xl font-bold pb-2 inline-block">My Projects</h2>
+                </div>
+                <div id="projects-wrapper" class="relative px-4">
+                    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Project Cards -->
+                        <div class="card-light project-card-item rounded-lg overflow-hidden"><img src="https://placehold.co/600x400/E0E7FF/1F2937?text=Project+1" alt="Project 1" class="w-full h-48 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-800 mb-2">E-commerce Platform</h3><p class="text-gray-600 mb-4">A full-featured e-commerce site built with React, Node.js, and MongoDB.</p><a href="#" class="text-blue-600 hover:text-blue-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-semibold project-link">View Project <i class="fas fa-arrow-right ml-1"></i></a></div></div>
+                        <div class="card-light project-card-item rounded-lg overflow-hidden"><img src="https://placehold.co/600x400/E0E7FF/1F2937?text=Project+2" alt="Project 2" class="w-full h-48 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-800 mb-2">Task Management App</h3><p class="text-gray-600 mb-4">A collaborative task manager with real-time updates using Firebase.</p><a href="#" class="text-blue-600 hover:text-blue-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-semibold project-link">View Project <i class="fas fa-arrow-right ml-1"></i></a></div></div>
+                        <div class="card-light project-card-item rounded-lg overflow-hidden"><img src="https://placehold.co/600x400/E0E7FF/1F2937?text=Project+3" alt="Project 3" class="w-full h-48 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-800 mb-2">Portfolio Website</h3><p class="text-gray-600 mb-4">This very portfolio, designed with Tailwind CSS and a focus on UX.</p><a href="#" class="text-blue-600 hover:text-blue-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-semibold project-link">View Project <i class="fas fa-arrow-right ml-1"></i></a></div></div>
+                        <div class="card-light project-card-item rounded-lg overflow-hidden"><img src="https://placehold.co/600x400/E0E7FF/1F2937?text=Project+4" alt="Project 4" class="w-full h-48 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-800 mb-2">Data Visualizer</h3><p class="text-gray-600 mb-4">A web app for visualizing complex datasets using D3.js and React.</p><a href="#" class="text-blue-600 hover:text-blue-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-semibold project-link">View Project <i class="fas fa-arrow-right ml-1"></i></a></div></div>
+                        <div class="card-light project-card-item rounded-lg overflow-hidden"><img src="https://placehold.co/600x400/E0E7FF/1F2937?text=Project+5" alt="Project 5" class="w-full h-48 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-800 mb-2">API Service</h3><p class="text-gray-600 mb-4">A RESTful API built with C# and ASP.NET for a mobile application.</p><a href="#" class="text-blue-600 hover:text-blue-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-semibold project-link">View Project <i class="fas fa-arrow-right ml-1"></i></a></div></div>
+                        <div class="card-light project-card-item rounded-lg overflow-hidden"><img src="https://placehold.co/600x400/E0E7FF/1F2937?text=Project+6" alt="Project 6" class="w-full h-48 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-800 mb-2">Game Server</h3><p class="text-gray-600 mb-4">A multiplayer game back-end written in Java with websockets.</p><a href="#" class="text-blue-600 hover:text-blue-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-semibold project-link">View Project <i class="fas fa-arrow-right ml-1"></i></a></div></div>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <button id="toggle-projects-btn" class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg">Show More</button>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="py-20">
+                <div class="text-center mb-12">
+                    <h2 class="section-title text-3xl font-bold pb-2 inline-block">Technical Skills</h2>
+                </div>
+                <div class="w-full overflow-x-hidden" style="mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+                    <div class="flex flex-nowrap animate-scroll-skills py-4">
+                        <!-- Skills -->
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-python text-5xl text-blue-400 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">Python</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-java text-5xl text-red-500 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">Java</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fas fa-code text-5xl text-purple-500 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">C#</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-lua text-5xl text-blue-700 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">Lua</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-js-square text-5xl text-yellow-400 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">JavaScript</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-html5 text-5xl text-orange-500 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">HTML5</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-css3-alt text-5xl text-blue-500 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">CSS3</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-react text-5xl text-cyan-400 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">React</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-python text-5xl text-blue-400 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">Python</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-java text-5xl text-red-500 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">Java</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fas fa-code text-5xl text-purple-500 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">C#</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-lua text-5xl text-blue-700 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">Lua</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-js-square text-5xl text-yellow-400 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">JavaScript</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-html5 text-5xl text-orange-500 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">HTML5</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-css3-alt text-5xl text-blue-500 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">CSS3</h3></div>
+                        <div class="card-light p-6 rounded-lg mx-3 text-center w-40 flex-shrink-0"><i class="fab fa-react text-5xl text-cyan-400 mb-3 icon-skill"></i><h3 class="font-semibold text-gray-800">React</h3></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-20">
+                <div class="text-center mb-12">
+                    <h2 class="section-title text-3xl font-bold pb-2 inline-block">Get In Touch</h2>
+                </div>
+                <div id="contact-container" class="contact-container">
+                    <button id="contact-main-button" class="btn-primary text-white rounded-full text-lg z-10 contact-main-button w-20 h-20 flex items-center justify-center">
+                        <i class="fas fa-plus text-3xl main-icon"></i>
+                    </button>
+                    <a href="https://github.com" target="_blank" class="contact-bubble bubble-1 bubble-light dark:bubble-dark"><i class="fab fa-github"></i></a>
+                    <a href="mailto:email@example.com" class="contact-bubble bubble-2 bubble-light dark:bubble-dark"><i class="fas fa-envelope"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="contact-bubble bubble-3 bubble-light dark:bubble-dark"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-bg py-8">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-2xl hover:text-blue-600 dark:hover:text-indigo-400 social-link transition-colors"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-2xl hover:text-blue-600 dark:hover:text-indigo-400 social-link transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-2xl hover:text-blue-600 dark:hover:text-indigo-400 social-link transition-colors"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2025 Aram Brunton. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const toggleSwitches = document.querySelectorAll('.dark-mode-toggle');
+            const html = document.documentElement;
+            const mainContent = document.getElementById('main-content');
+            const scrollIndicator = document.getElementById('scroll-indicator');
+
+            // --- Theme Toggling ---
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    html.classList.add('dark');
+                } else {
+                    html.classList.remove('dark');
+                }
+                toggleSwitches.forEach(toggle => toggle.checked = (theme === 'dark'));
+            };
+
+            toggleSwitches.forEach(toggle => {
+                toggle.addEventListener('change', (e) => {
+                    const newTheme = e.target.checked ? 'dark' : 'light';
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme(newTheme);
+                    // Re-initialize particles with new colors
+                    if(window.particleSystem) window.particleSystem.init();
+                });
+            });
+
+            // --- Initial Theme Load ---
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+
+            // --- Mobile Menu ---
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('#mobile-menu a, header nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // --- Contact Bubble Interaction ---
+            const contactContainer = document.getElementById('contact-container');
+            contactContainer.addEventListener('click', () => {
+                if ('ontouchstart' in window) {
+                    contactContainer.classList.toggle('active');
+                }
+            });
+
+            // --- Toggle Projects ---
+            const toggleBtn = document.getElementById('toggle-projects-btn');
+            const projectsWrapper = document.getElementById('projects-wrapper');
+            
+            if (toggleBtn && projectsWrapper) {
+                projectsWrapper.classList.add('projects-collapsed');
+                toggleBtn.addEventListener('click', () => {
+                    const isCollapsed = projectsWrapper.classList.contains('projects-collapsed');
+                    if (isCollapsed) {
+                        projectsWrapper.classList.remove('projects-collapsed');
+                        projectsWrapper.classList.add('projects-expanded');
+                        toggleBtn.textContent = 'Show Less';
+                    } else {
+                        projectsWrapper.classList.add('projects-collapsed');
+                        projectsWrapper.classList.remove('projects-expanded');
+                        toggleBtn.textContent = 'Show More';
+                    }
+                });
+            }
+
+            // --- Scroll to Reveal ---
+            const handleScroll = () => {
+                if (window.scrollY > 50) {
+                    mainContent.classList.add('loaded');
+                    scrollIndicator.style.display = 'none';
+                    window.removeEventListener('scroll', handleScroll);
+                }
+            };
+            window.addEventListener('scroll', handleScroll);
+
+            // --- Cursor Glow Effect ---
+            const cursorGlow = document.getElementById('cursor-glow');
+            if (cursorGlow) {
+                window.addEventListener('mousemove', (e) => {
+                    cursorGlow.style.left = `${e.clientX}px`;
+                    cursorGlow.style.top = `${e.clientY}px`;
+                });
+                document.body.addEventListener('mouseenter', () => { cursorGlow.style.opacity = '1'; });
+                document.body.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; });
+            }
+
+            // --- Particle System ---
+            const canvas = document.getElementById('particle-canvas');
+            if(canvas) {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+
+                window.particleSystem = {
+                    init: function() {
+                        canvas.width = window.innerWidth;
+                        canvas.height = window.innerHeight;
+                        particles = [];
+                        let numberOfParticles = (canvas.width * canvas.height) / 9000;
+                        for (let i = 0; i < numberOfParticles; i++) {
+                            let size = Math.random() * 1.5 + 1;
+                            let x = Math.random() * (innerWidth - size * 2) + size;
+                            let y = Math.random() * (innerHeight - size * 2) + size;
+                            let directionX = (Math.random() * .4) - .2;
+                            let directionY = (Math.random() * .4) - .2;
+                            let color = document.documentElement.classList.contains('dark') ? 'rgba(129, 140, 248, 0.6)' : 'rgba(59, 130, 246, 0.4)';
+                            particles.push({ x, y, directionX, directionY, size, color });
+                        }
+                    },
+                    animate: function() {
+                        requestAnimationFrame(this.animate.bind(this));
+                        ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+                        for (let i = 0; i < particles.length; i++) {
+                            let particle = particles[i];
+                            particle.x += particle.directionX;
+                            particle.y += particle.directionY;
+
+                            // Wall collision
+                            if (particle.x + particle.size > canvas.width || particle.x - particle.size < 0) {
+                                particle.directionX = -particle.directionX;
+                            }
+                            if (particle.y + particle.size > canvas.height || particle.y - particle.size < 0) {
+                                particle.directionY = -particle.directionY;
+                            }
+                            // Draw particle
+                            ctx.beginPath();
+                            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2, false);
+                            ctx.fillStyle = particle.color;
+                            ctx.fill();
+                        }
+                    }
+                };
+                
+                window.addEventListener('resize', () => {
+                    window.particleSystem.init();
+                });
+
+                window.particleSystem.init();
+                window.particleSystem.animate();
+            }
+        });
+    </script>
+</body>
+</html>
