@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Portfolio - Project Details</title>
+    <title>Flight Path Generator App - Project Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -61,12 +61,12 @@
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 header-light">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../../index.html" class="text-2xl font-bold text-gray-800">AB</a>
+            <a href="/index.html" class="text-2xl font-bold text-gray-800">AB</a>
             <nav class="hidden md:flex space-x-8 items-center">
-                <a href="../../index.html#about" class="nav-link transition-colors">About</a>
-                <a href="../../index.html#projects" class="nav-link transition-colors">Projects</a>
-                <a href="../../index.html#skills" class="nav-link transition-colors">Skills</a>
-                <a href="../../index.html#contact" class="nav-link transition-colors">Contact</a>
+                <a href="/index.html#about" class="nav-link transition-colors">About</a>
+                <a href="/index.html#projects" class="nav-link transition-colors">Projects</a>
+                <a href="/index.html#skills" class="nav-link transition-colors">Skills</a>
+                <a href="/index.html#contact" class="nav-link transition-colors">Contact</a>
             </nav>
         </div>
     </header>
@@ -74,26 +74,33 @@
     <main class="container mx-auto px-6 pt-32 pb-16 max-w-3xl">
         <section>
             <div class="mb-8 text-center">
-                <img src="https://placehold.co/600x400/E0E7FF/1F2937?text=SQL+Portfolio" alt="SQL Portfolio Screenshot" class="rounded-lg shadow-lg mx-auto mb-6 w-full max-w-xl">
-                <h1 class="section-title text-4xl font-bold pb-2 inline-block mb-2">SQL Portfolio</h1>
-                <p class="text-gray-600 dark:text-gray-400 text-lg mb-4">A full document showing proof of knowledge on SQL queries in SQL Server</p>
+                <img src="https://placehold.co/600x400/E0E7FF/1F2937?text=Flight+Paths" alt="Flight Path Generator Screenshot" class="rounded-lg shadow-lg mx-auto mb-6 w-full max-w-xl">
+                <h1 class="section-title text-4xl font-bold pb-2 inline-block mb-2">Flight Path Generator App</h1>
+                <p class="text-gray-600 dark:text-gray-400 text-lg mb-4">A shortest path generator for small planes using C# and Windows Forms</p>
             </div>
             <div class="mb-10">
                 <h2 class="text-2xl font-semibold mb-2">Project Overview</h2>
                 <p class="mb-4 text-gray-700 dark:text-gray-300">
-                    This document shows proof of understanding of SQL Server, it shows my understanding of using queries on a 'superhero' database example given to me by University
+                    The Flight Path Generator App is a Windows Forms application written in C# that helps small aircraft pilots and planners determine the shortest and most efficient flight paths between airports. The app uses distance between coordinates to calculate optimal routes, taking into account various constraints and user inputs.
                 </p>
                 <ul class="list-disc list-inside mb-4 text-gray-700 dark:text-gray-300">
-                    <li>Contains SQL queries for selecting and manipulating data from a database</li>
-                    <li>Provides explanations of each query used and what they are for</li>
-                    <li>Created as a guide for developers wanting to use the database in their applications</li>
+                    <li>Built with C# and Windows Forms</li>
+                    <li>Created for my A-Level Computer Science NEA</li>
+                    <li>User-friendly interface for entering airports and waypoints</li>
+                    <li>Visualizes the calculated flight path on a map</li>
+                </ul>
+                <h3 class="text-xl font-semibold mb-2">Key Features</h3>
+                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                    <li>Interactive user input for selecting start and end points, fuel quantity and plane size</li>
+                    <li>Save flight plan as CSV</li>
+                    <li>Responsive UI</li>
                 </ul>
             </div>
             <div class="flex flex-col md:flex-row items-center gap-6 mb-10 justify-center">
-                <a href="../../index.html#projects" class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg mb-4 md:mb-0 md:mr-4 flex items-center justify-center">
+                <a href="/index.html#projects" class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg mb-4 md:mb-0 md:mr-4 flex items-center justify-center">
                     <i class="fas fa-arrow-left mr-2"></i> Back to Projects
                 </a>
-                <a href="/projects/pages/downloads/sqlportfolio/" download class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg flex items-center justify-center">
+                <a href="/projects/pages/downloads/flightpath/" download class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg flex items-center justify-center">
                     <i class="fas fa-download mr-2"></i> Download Source Code
                 </a>
             </div>
