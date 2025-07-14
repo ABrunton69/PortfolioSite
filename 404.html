@@ -1,1 +1,155 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - Page Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <style>
+        body {
+            background: #111827;
+            color: #fff;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+    
+        .container {
+            background: #1F2937;
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.2);
+            text-align: center;
+        }
+    
+        h1 {
+            font-size: 5rem;
+            margin: 0 0 1rem 0;
+            letter-spacing: 2px;
+        }
+    
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+    
+        a {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: #4F46E5;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    
+        a:hover {
+            background: #6366F1;
+        }
+    
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #e74c3c;
+        }
+    
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    
+        /* Hide effects on mobile */
+        @media (hover: none) or (pointer: coarse) {
+    
+            #cursor-glow,
+            #particle-canvas {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="container">
+        <img src="/img/Avatar.png" alt="Aram Brunton" style="width:90px; height:90px;" class="mx-auto rounded-full mb-12 border-4 border-gray-200 dark:border-gray-700 shadow-lg">
+        <h1>Error 404</h1>
+        <p>This page was taken by the void, if you think
+            this is an error then contact me here
+        </p>
+        <a href="mailto:amdrummer2015@gmail.com" class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg inline-block">Contact Me</a>
+
+        <a href="/index.html">Go back to Home</a>
+    </div>
+</body>
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('particle-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            window.particleSystem = {
+                init: function () {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    particles = [];
+                    let numberOfParticles = (canvas.width * canvas.height) / 9000;
+                    for (let i = 0; i < numberOfParticles; i++) {
+                        let size = Math.random() * 1.5 + 1;
+                        let x = Math.random() * (innerWidth - size * 2) + size;
+                        let y = Math.random() * (innerHeight - size * 2) + size;
+                        let directionX = (Math.random() * .4) - .2;
+                        let directionY = (Math.random() * .4) - .2;
+                        let color = document.documentElement.classList.contains('dark') ? 'rgba(129, 140, 248, 0.6)' : 'rgba(59, 130, 246, 0.4)';
+                        particles.push({ x, y, directionX, directionY, size, color });
+                    }
+                },
+                animate: function () {
+                    requestAnimationFrame(this.animate.bind(this));
+                    ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+                    for (let i = 0; i < particles.length; i++) {
+                        let particle = particles[i];
+                        particle.x += particle.directionX;
+                        particle.y += particle.directionY;
+
+                        // Wall collision
+                        if (particle.x + particle.size > canvas.width || particle.x - particle.size < 0) {
+                            particle.directionX = -particle.directionX;
+                        }
+                        if (particle.y + particle.size > canvas.height || particle.y - particle.size < 0) {
+                            particle.directionY = -particle.directionY;
+                        }
+                        // Draw particle
+                        ctx.beginPath();
+                        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2, false);
+                        ctx.fillStyle = particle.color;
+                        ctx.fill();
+                    }
+                }
+            };
+
+            window.addEventListener('resize', () => {
+                window.particleSystem.init();
+            });
+
+            window.particleSystem.init();
+            window.particleSystem.animate();
+        }
+    })
+    // --- Particle System ---
+</script>
