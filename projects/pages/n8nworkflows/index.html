@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N8N Workflows - Project Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="index.js"></script>
+
+</head>
+
+<body class="antialiased">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 header-light">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/index.html" class="text-2xl font-bold text-gray-800">AB</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="/index.html#about" class="nav-link transition-colors">About</a>
+                <a href="/index.html#projects" class="nav-link transition-colors">Projects</a>
+                <a href="/index.html#skills" class="nav-link transition-colors">Skills</a>
+                <!-- <a href="/index.html#contact" class="nav-link transition-colors">Contact</a> -->
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-32 pb-16 max-w-3xl">
+        <section>
+            <div class="mb-8 text-center">
+                <img src="https://placehold.co/600x400/E0E7FF/1F2937?text=N8N+Workflows" alt="SQL Portfolio Screenshot"
+                    class="rounded-lg shadow-lg mx-auto mb-6 w-full max-w-xl">
+                <h1 class="section-title text-4xl font-bold pb-2 inline-block mb-2">N8N Workflows</h1>
+                <p class="text-gray-600 dark:text-gray-400 text-lg mb-4">A list of my N8N Workflows that demonstrate
+                    automation and data collection</p>
+            </div>
+            <div class="mb-10">
+                <h2 class="text-2xl font-semibold mb-2">Project Overview</h2>
+                <p class="mb-4 text-gray-700 dark:text-gray-300">
+                    N8N is an open source AI workflow automation tool that I host on my debian linux server. It allows
+                    me to create the following demonstrations that remove manual tasks I have to do in day to day life
+                </p>
+                <ul class="list-disc list-inside mb-4 text-gray-700 dark:text-gray-300">
+                    <li>Github tracker that tracks when I or another use pushes to my git account, records details of
+                        the push and posts it to a discord channel</li>
+                    <li>RSS Tracker that tracks https://krebsonsecurity.com/ & https://thehackernews.com/ for new
+                        articles, it gives a brief overview of the article and stores it in a google sheet after sending
+                        it to discord</li>
+                </ul>
+            </div>
+
+            <div class="mb-8 text-center">
+                <h1 class="section-title text-3xl font-bold pb-2 inline-block mb-2">Images</h1>
+                <div>
+                    <br>
+                    <h1 class="text-2xl font-bold pb-2 inline-block mb-2">Git Tracking</h1>
+                    <div class="p-3">
+                        <img src="/img/n8nworkflows/githubtracking.png" alt="Github Tracking"
+                            class="enlargeable-image cursor-pointer w-full h-auto">
+                    </div>
+                    <div class="p-3">
+                        <img src="/img/n8nworkflows/githubtracking2.png" alt="Github Tracking"
+                            class="enlargeable-image cursor-pointer w-full h-auto">
+                    </div>
+                    <div class="p-3">
+                        <img src="/img/n8nworkflows/githubtracking3.png" alt="Github Tracking"
+                            class="enlargeable-image cursor-pointer w-full h-auto">
+                    </div>
+                    <br>
+                    <h1 class="text-2xl font-bold pb-2 inline-block mb-2">RSS Feed</h1>
+                    <div class="p-3">
+                        <img src="/img/n8nworkflows/rssfeed.png" alt="RSS Feed"
+                            class="enlargeable-image cursor-pointer w-full h-auto">
+                    </div>
+                    <div class="p-3">
+                        <img src="/img/n8nworkflows/rssfeed2.png" alt="RSS Feed"
+                            class="enlargeable-image cursor-pointer w-full h-auto">
+                    </div>
+                    <div class="p-3">
+                        <img src="/img/n8nworkflows/rssfeed3.png" alt="RSS Feed"
+                            class="enlargeable-image cursor-pointer w-full h-auto">
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-6 mb-10 justify-center">
+                <a href="/index.html#projects"
+                    class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg mb-4 md:mb-0 md:mr-4 flex items-center justify-center">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Projects
+                </a>
+                <!-- <a href="#" download class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg flex items-center justify-center">
+                    <i class="fas fa-download mr-2"></i> Download PDF Document
+                </a>
+                <a href="/projects/pages/sqlportfolio/superheroes.sql" download class="btn-primary text-white font-bold py-3 px-8 rounded-lg text-lg flex items-center justify-center">
+                    <i class="fas fa-download mr-2"></i> Download SQL Queries
+                </a> -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-bg py-8">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://github.com/ABrunton69"
+                    class="text-2xl hover:text-blue-600 dark:hover:text-indigo-400 social-link transition-colors"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/aram-brunton-0b1812343/"
+                    class="text-2xl hover:text-blue-600 dark:hover:text-indigo-400 social-link transition-colors"><i
+                        class="fab fa-linkedin"></i></a>
+                <!-- <a href="#" class="text-2xl hover:text-blue-600 dark:hover:text-indigo-400 social-link transition-colors"><i class="fab fa-twitter"></i></a> -->
+            </div>
+            <p>&copy; 2025 Aram Brunton. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+</body>
